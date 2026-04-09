@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+<section class="product-detail-section">
+    <div class="container">
+        <div class="product-card1">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-image">
+                        <img src="{{single_product.images.url}}" alt="" class="img-wrap">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <h2>{{single_product.product_name}}</h2>
+                        <h4 class="price">${{single_product.price}}</h4>
+                        <p class="desc">{{single_product.description}}</p>
+                        <div class="option" >
+                            <span class="chip active">color:</span>
+                            <button class="chip">Black</button>
+                            <button class="chip">Gray</button>
+                            <button class="chip">White</button>
+                        </div>
+                        <div class="option">
+                            <span class="chip active">Size:</span>
+                            <button class="chip">S</button>
+                            <button class="chip">M</button>
+                            <button class="chip">L</button>
+                        </div>
+<!--                        <button class="btn-cart">Add to Cart</button>-->
+                        {% if single_product.stock <= 0 %}
+                           <h5 class="text-danger">Out of stock</h5>
+                        {% else %}
+                           <a href="" class="btn btn-primary"><span class="text">Add to cart</span><i class="fas fa-shopping-cart"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <h3>Customer Review</h3>
+            <div class="review-box">
+                <h5>Mike John</h5>
+                <p>Amazing Product !</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<!--<section class="section-pagetop " style="height:20vh; margin-top:150px;">-->
+<!--    <div class="container">-->
+<!--        <h2 class="title-page" style="color:black;">Our store</h2>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--<section class="section-content padding-y">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <aside class="col-md-3"></aside>-->
+<!--        <div class="card">-->
+<!--            <article class="filter-group">-->
+<!--                <header class="card-header">-->
+<!--                    <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">-->
+<!--                        <i class="icon-control fa fa-chevron-down"></i>-->
+<!--                        <h6 class="title">Categories</h6>-->
+<!--                    </a>-->
+<!--                </header>-->
+<!--                <div class="filter-content collapse show" id="collapse_1" style="">-->
+<!--                    <div class="card-body">-->
+<!--                        <ul class="list-menu">-->
+<!--                            <li><a href="#">People</a></li>-->
+<!--                            <li><a href="#"></a></li>-->
+<!--                            <li><a href="#"></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--<section class="section-content padding-y">-->
+<!--<div class="container">-->
+
+<!--    &lt;!&ndash; 🔹 Category Filter &ndash;&gt;-->
+<!--    <div class="mb-4 text-center">-->
+<!--        <button class="btn btn-outline-dark m-1">All</button>-->
+<!--        <button class="btn btn-outline-primary m-1">Electronics</button>-->
+<!--        <button class="btn btn-outline-success m-1">Clothes</button>-->
+<!--        <button class="btn btn-outline-danger m-1">Shoes</button>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; 🔹 Product Grid &ndash;&gt;-->
+<!--    <div class="row">-->
+<!--        {% for product in products %}-->
+<!--        <div class="col-md-3 col-sm-6">-->
+<!--            <div class="card product-card shadow-sm mt-5">-->
+
+<!--                &lt;!&ndash; Image &ndash;&gt;-->
+<!--                <div class="img-box">-->
+<!--                    <img src="{{ product.images.url }}" class="card-img-top">-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Content &ndash;&gt;-->
+<!--                <div class="card-body text-center">-->
+<!--                    <h6 class="card-title">{{ product.product_name }}</h6>-->
+<!--                    <p class="text-primary fw-bold">₹{{ product.price }}</p>-->
+
+<!--                    <a href="#" class="btn btn-dark btn-sm">Add to Cart</a>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+
+<!--</div>-->
+<!--</section>-->
+<section class="section-content padding-y" style="min-height:130vh; margin-top:150px;">
+<div class="container">
+
+    <!-- 🔥 TOP FILTER BAR -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+
+        <h4>Our Store</h4>
+
+        <div>
+            <select class="form-select d-inline w-auto">
+                <option>Sort by</option>
+                <option>Price low to high</option>
+                <option>Price high to low</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- 🔥 CATEGORY CHIPS (SCROLLABLE) -->
+    <div class="mb-4 category-scroll">
+<!--        <button class="chip active">All</button>-->
+        <a href="{% url 'store' %}" class="chip active">All Products</a>
+        {% for category in links %}
+<!--        <button class="chip"><a href="chip {{category.get_url}}">{{category.category_name}}</a></button>-->
+        <a href="{{category.get_url}}" class="chip">{{category.category_name}}</a>
+        {% endfor %}
+<!--        <button class="chip">Clothes</button>-->
+<!--        <button class="chip">Shoes</button>-->
+<!--        <button class="chip">Watches</button>-->
+<!--        <button class="chip">Accessories</button>-->
+    </div>
+
+    <div class="border-bottom mb-4 pb-3">
+        <div class="form-inline">
+            <span class="mr-md-auto"><b>{{product_count}}</b> items found</span>
+        </div>
+    </div>
+    <!-- 🔥 PRODUCT GRID -->
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="product-card">
+
+                <div class="img-box">
+                    <a href="{{product.get_url}}">
+                        <img src="{{ product.images.url }}">
+                    </a>
+
+                </div>
+
+                <div class="p-3 text-center">
+                    <h6>
+                        <a href="{{product.get_url}}" style="text-decoration:none; color:black;">{{ product.product_name }}</a>
+                    </h6>
+                    <p class="price">₹{{ product.price }}</p>
+
+                    <button class="btn btn-dark btn-sm">Add to Cart</button>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+</section>
+{% endblock %}

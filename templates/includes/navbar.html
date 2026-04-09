@@ -1,0 +1,144 @@
+<!--{% load static %}-->
+<!-- ***** Header Area Start *****-->
+<!--    <header class="header-area header-sticky">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-12">-->
+<!--                    <nav class="main-nav">-->
+<!--                        &lt;!&ndash; ***** Logo Start ***** &ndash;&gt;-->
+<!--                        <a href="index.html" class="logo">-->
+<!--                            <img src="{% static 'images/logo.png' %}">-->
+<!--                        </a>-->
+<!--                        &lt;!&ndash; ***** Logo End ***** &ndash;&gt;-->
+<!--                        &lt;!&ndash; ***** Menu Start ***** &ndash;&gt;-->
+<!--                        <ul class="nav">-->
+<!--                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>-->
+<!--&lt;!&ndash;                            <li class="scroll-to-section"><a href="#men">Men's</a></li>&ndash;&gt;-->
+<!--                            <li></li>-->
+<!--                            <li class="scroll-to-section"><a href="#women">Women's</a></li>-->
+<!--                            <li class="scroll-to-section"><a href="#kids">Kid's</a></li>-->
+<!--                            <li class="submenu">-->
+<!--                                <a href="javascript:;">Pages</a>-->
+<!--                                <ul>-->
+<!--                                    <li><a href="about.html">About Us</a></li>-->
+<!--                                    <li><a href="products.html">Products</a></li>-->
+<!--                                    <li><a href="single-product.html">Single Product</a></li>-->
+<!--                                    <li><a href="contact.html">Contact Us</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                            <li class="submenu">-->
+<!--                                <a href="javascript:;">Features</a>-->
+<!--                                <ul>-->
+<!--                                    <li><a href="#">Features Page 1</a></li>-->
+<!--                                    <li><a href="#">Features Page 2</a></li>-->
+<!--                                    <li><a href="#">Features Page 3</a></li>-->
+<!--                                    <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                            <li class="scroll-to-section"><a href="#explore">Explore</a></li>-->
+<!--                        </ul>-->
+<!--                        <a class='menu-trigger'>-->
+<!--                            <span>Menu</span>-->
+<!--                        </a>-->
+<!--&lt;!&ndash;                         ***** Menu End ***** &ndash;&gt;-->
+<!--                    </nav>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </header>-->
+
+{% load static %}
+
+<header class="header-area header-sticky" >
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav d-flex align-items-center justify-content-between">
+
+                    <a href="index.html" class="logo mt-2">
+                        <img src="{% static 'images/logo.png' %}" alt="GreatKart" style="max-width: 150px;">
+                    </a>
+                    <ul class="nav d-flex align-items-center">
+<!--                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>-->
+
+                        <li class="submenu">
+                            <a href="javascript:;" class="btn btn-primary text-white" style="padding: 0px 20px; border-radius: 5px;">
+                                <i class="fa fa-bars"></i> All Category
+                            </a>
+                            <ul>
+                                {% for category in links %}
+                                <li><a href="{{ category.get_url}}">{{category.category_name}}</a></li>
+<!--                                <li><a href="#">Clothes</a></li>-->
+<!--                                <li><a href="#">Shoes</a></li>-->
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        <li class="scroll-to-section"><a href="/store">Store</a></li>
+
+                        <li>
+                            <form action="#" class="search-wrap" style="display: flex; margin: 0 15px;">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search..." style="width: 250px;">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+
+<!--                        <li class="login-info" style="margin-left: 20px; line-height: 1.2;">-->
+<!--                            <small class="text-muted">Welcome guest!</small><br>-->
+<!--                            <a href="/login">Sign in</a> | <a href="/register">Register</a>-->
+<!--                        </li>-->
+                        <div class="d-flex align-items-center ml-3">
+                            <div class="widget-header mr-3 text-right">
+                                <small class="text-muted d-block" style="font-size:11px;">Welcome guest</small>
+                                <div style="white-space: nowrap;">
+                                    <a href="/login" class="text-dark small font-weight-bold">Sign in</a>
+                                    <span class="dark-transp">|</span>
+                                    <a href="/register" class="text-dark small font-weight-bold">Register</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <li class="cart-icon" style="margin-left: 20px; position: relative;">
+                            <a href="/cart" style="background: #f8f9fa; padding: 10px; border-radius: 50%; border: 1px solid #ddd;">
+                                <i class="fa fa-shopping-cart" style="color: #333;"></i>
+                                <span class="badge badge-pill badge-danger" style="position: absolute; top: -5px; right: -5px;">0</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<style>
+    /* Kuch extra styling taaki image jaisa look aaye */
+    .main-nav {
+        display: flex !important;
+        align-items: center;
+    }
+    .nav {
+        display: flex !important;
+        align-items: center;
+        list-style: none;
+    }
+    .input-group .form-control {
+        border-radius: 5px 0 0 5px;
+    }
+    .input-group-append .btn {
+        border-radius: 0 5px 5px 0;
+    }
+    .badge-danger {
+        background-color: #ff4d4d;
+    }
+</style>
