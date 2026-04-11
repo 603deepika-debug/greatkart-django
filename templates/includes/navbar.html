@@ -94,14 +94,25 @@
 <!--                            <a href="/login">Sign in</a> | <a href="/register">Register</a>-->
 <!--                        </li>-->
                         <div class="d-flex align-items-center ml-3">
+                            {% if user.id is None %}
                             <div class="widget-header mr-3 text-right">
                                 <small class="text-muted d-block" style="font-size:11px;">Welcome guest</small>
                                 <div style="white-space: nowrap;">
-                                    <a href="/login" class="text-dark small font-weight-bold">Sign in</a>
+                                    <a href="{% url 'login' %}" class="text-dark small font-weight-bold">Sign in</a>
                                     <span class="dark-transp">|</span>
-                                    <a href="/register" class="text-dark small font-weight-bold">Register</a>
+                                    <a href="{% url 'register' %}" class="text-dark small font-weight-bold">Register</a>
                                 </div>
                             </div>
+                            {% else %}
+                            <div class="widget-header mr-3 text-right">
+                                <small class="text-muted d-block" style="font-size:11px;">Welcome {{user.first_name}}</small>
+                                <div style="white-space: nowrap;">
+                                    <a href="{% url 'dashboard' %}" class="text-dark small font-weight-bold">Dashboard</a>
+                                    <span class="dark-transp">|</span>
+                                    <a href="{% url 'logout' %}" class="text-dark small font-weight-bold">Logout</a>
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
 
                         <li class="cart-icon" style="margin-left: 20px; position: relative;">
