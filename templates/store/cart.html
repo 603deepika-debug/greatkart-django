@@ -47,7 +47,7 @@
                         <form action="{% url 'add_cart' cart_item.product.id %}" method="POST">
                             {% csrf_token %}
                             {% for item in cart_item.variations.all %}
-                            <input type="hidden" name="{{ item.variation_category | lower }}" value="{{item.variation_value | capfirst}}">
+                            <input type="hidden" name="{{ item.variation_category | lower }}" value="{{item.variation_value }}">
                             {% endfor %}
                             <button type="submit" id="button-minus" class="btn btn-outline-secondary">+</button>
                         </form>
@@ -89,7 +89,7 @@
                 <img src="https://via.placeholder.com/150x40?text=Payment+Methods" class="img-fluid" alt="payments">
             </div>
 
-            <button class="btn btn-primary w-100 mb-2">Checkout</button>
+            <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mb-2">Checkout</a>
             <a href="{% url 'store' %}" class="btn btn-outline-secondary w-100">Continue Shopping</a>
           </div>
         </div>
