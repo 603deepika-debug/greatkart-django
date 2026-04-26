@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 col-md-7" style="margin-top: 100px;">
+            <h4 class="text-center mb-3">Review Your Order and Make Payment</h4>
+            <div class="card mb-3">
+                <h5 class="card-header">Billing Address</h5>
+                <div class="card-body">
+                    <p class="card-text mb-0"><strong>Name:</strong> {{order.full_name}}</p>
+                    <p class="card-text mb-0"><strong>Address:</strong> {{order.full_address}}</p>
+                    <p class="card-text mb-0">{{order.city}}, {{order.state}}</p>
+                    <p class="card-text mb-0">{{order.country}}</p>
+                    <p class="card-text mb-0"><strong>Email:</strong> {{order.email}}</p>
+                    <p class="card-text mb-0"><strong>Phone:</strong> {{order.phone}}</p>
+                    {% if order.order_note %}
+                        <p class="card-text mb-0"><b>Order Note:</b> {{order.order_note}}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <h5 class="card-header">Payment Method</h5>
+                <div class="card-body">
+                    <p class="card-text">PayPal</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <h5 class="card-header">Review Products</h5>
+                <div class="card-body">
+                    <div class="row d-none d-md-flex mb-2 pb-2 border-bottom text-muted" style="font-weight:bold; font-size:12px;">
+                        <div class="col-md-6">PRODUCT</div>
+                        <div class="col-md-3 text-center">QUANTITY</div>
+                        <div class="col-md-3 text-end">PRICE</div>
+                    </div>
+
+
+                    {% for item in order_products %}
+                    <div class="row align-items-center mb-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ item.product.images.url }}" width="60" class="img-fluid rounded border">
+                                <div class="ms-3" style="margin-left:15px;">
+                                    <a href="{{ item.product.get_url }}" class="text-dark font-weight-bold d-block">{{ item.product.product_name}}</a>
+                                    <small class="text-muted">
+                                        {% if item.variations.all %}
+                                            {% for v in item.variations.all %}
+                                                {{ v.variation_category | capfirst }} : {{ v.variation_value | capfirst }} <br>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <span class="text-muted">{{ item.quantity}}</span>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <div class="price-wrap">
+                                <var class="price d-block font-weight-bold">${{ item.sub_total}}</var>
+                                <small class="text-muted">${{ item.product.price}} each</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-5" style="margin-top: 100px;">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Total price:</span>
+                        <span class="text-dark font-weight-bold">${{total}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Tax:</span>
+                        <span class="text-dark font-weight-bold">${{tax}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-dark h5 font-weight-bold">Grand Total:</span>
+                        <span class="text-dark h5 font-weight-bold">${{grand_total}}</span>
+                    </div>
+
+                    <hr>
+                    <p class="text-center mb-3">
+                        <img src="{% static 'images/misc/payments.png' %}" height="26">
+                    </p>
+
+                    <div id="paypal-button-container">
+                        <button class="btn btn-primary w-100">Make Payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
